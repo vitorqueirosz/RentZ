@@ -1,9 +1,13 @@
 import { useNavigation } from '@react-navigation/native';
-import React from 'react';
+import { format } from 'date-fns';
+import { parseISO } from 'date-fns/esm';
+import React, { useState } from 'react';
 
-import { Calendar, CalendarList, Agenda } from 'react-native-calendars';
+import { Calendar, RangeType } from 'react-native-calendario';
+import { useDispatch } from 'react-redux';
 import setIcon from '../../assets/seta.png';
 import Button from '../../components/Button';
+import { scheduleDateRequest } from '../../store/ducks/schedule/actions';
 
 import {
   Container,
@@ -23,6 +27,46 @@ import {
 const Schedule: React.FC = () => {
   const navigation = useNavigation();
 
+  const dispatch = useDispatch();
+
+  const [initialDate, setInitialDate] = useState<Date>(new Date());
+  const [finalDate, setFinalDate] = useState<Date>(new Date());
+
+  const [selectedInitialDate, setSelectedInitialDate] = useState<string>('');
+  const [selectedFinalDate, setSelectedFinalDate] = useState<string>('');
+
+  const [showInitialDate, setShowInitialDate] = useState<string>('');
+  const [showFinalDate, setShowFinalDate] = useState<string>('');
+
+  function handleSelectedDay(day: RangeType) {
+    setInitialDate(day.startDate);
+    setFinalDate(day?.endDate);
+
+    setShowInitialDate(
+      format(parseISO(day.startDate.toISOString()), 'dd MMMM yyyy'),
+    );
+
+    if (day.endDate) {
+      setShowFinalDate(
+        format(parseISO(day.endDate.toISOString()), 'dd MMMM yyyy'),
+      );
+      setSelectedInitialDate(
+        format(parseISO(day.startDate.toISOString()), 'yyyy-MM-dd'),
+      );
+      setSelectedFinalDate(
+        format(parseISO(day.endDate.toISOString()), 'yyyy-MM-dd'),
+      );
+    }
+  }
+
+  function handleSelectDate() {
+    dispatch(
+      scheduleDateRequest({ from: selectedInitialDate, to: selectedFinalDate }),
+    );
+
+    navigation.navigate('VehiclesList');
+  }
+
   return (
     <Container>
       <Header>
@@ -31,46 +75,57 @@ const Schedule: React.FC = () => {
         <BottomContent>
           <SelectInitialDateContainer>
             <FromText>De</FromText>
-            <SelectedInitialDateText>20</SelectedInitialDateText>
+            <SelectedInitialDateText>{showInitialDate}</SelectedInitialDateText>
           </SelectInitialDateContainer>
 
           <ArrowImage source={setIcon} />
 
           <SelectFinalDateContainer>
-            <ToText>Ate</ToText>
-            <SelectedFinalDateText>25</SelectedFinalDateText>
+            <ToText>Até</ToText>
+            <SelectedFinalDateText>{showFinalDate}</SelectedFinalDateText>
           </SelectFinalDateContainer>
         </BottomContent>
       </Header>
 
       <Calendar
-        markingType="period"
-        markedDates={{
-          '2020-10-22': { marked: true, dotColor: '#50cebb' },
-          '2020-10-23': { marked: true, dotColor: '#50cebb' },
-          '2020-10-24': {
-            startingDay: true,
-            color: '#50cebb',
-            textColor: 'white',
+        onChange={date => handleSelectedDay(date)}
+        startDate={initialDate}
+        endDate={finalDate}
+        theme={{
+          monthTitleTextStyle: {
+            color: '#ffc700',
+            fontWeight: '300',
+            fontSize: 16,
           },
-          '2020-10-22': { color: '#70d7c7', textColor: 'white' },
-          '2020-10-23': {
-            color: '#70d7c7',
-            textColor: 'white',
-            marked: true,
-            dotColor: 'white',
+          emptyMonthTextStyle: {
+            fontWeight: '200',
           },
-          '2020-10-24': { color: '#70d7c7', textColor: 'white' },
-          '2020-10-25': {
-            endingDay: true,
-            color: '#50cebb',
-            textColor: 'white',
+          weekColumnStyle: {
+            paddingVertical: 10,
+          },
+          weekColumnTextStyle: {
+            color: '#b6c1cd',
+            fontSize: 13,
+          },
+          dayTextStyle: {
+            color: '#2d4150',
+            fontWeight: '200',
+            fontSize: 15,
+          },
+          todayTextStyle: {
+            color: '#1d1f24',
+          },
+          activeDayContainerStyle: {
+            backgroundColor: '#1d1f24',
+          },
+          activeDayTextStyle: {
+            color: 'white',
           },
         }}
       />
 
       <ButtonContainer>
-        <Button disabled onPress={() => navigation.navigate('VehiclesList')}>
+        <Button disabled onPress={handleSelectDate}>
           Escolher
         </Button>
       </ButtonContainer>

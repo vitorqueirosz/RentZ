@@ -4,10 +4,12 @@ import {
     Entity,
     JoinColumn,
     ManyToOne,
+    OneToOne,
     PrimaryGeneratedColumn,
     UpdateDateColumn,
 } from 'typeorm';
 import Brand from './Brand';
+import Rent from './Rent';
 
 @Entity('cars')
 class Car {
@@ -50,6 +52,9 @@ class Car {
     @ManyToOne(() => Brand, brand => brand.cars)
     @JoinColumn({ name: 'brand_id' })
     brand: Brand;
+
+    @OneToOne(() => Rent, rent => rent.car)
+    rent: Rent;
 }
 
 export default Car;

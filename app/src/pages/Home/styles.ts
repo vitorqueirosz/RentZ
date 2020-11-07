@@ -6,7 +6,7 @@ export const Container = styled.View`
 `;
 
 export const Header = styled.View`
-  background: #ffc700;
+  background: #1d1f24;
   height: 140px;
   align-items: center;
   justify-content: space-between;
@@ -34,7 +34,7 @@ export const SaudationName = styled.Text`
   font-size: 18px;
 `;
 export const ProfileNameText = styled.Text`
-  color: #6c6c6c;
+  color: #ffc700;
   font-size: 20px;
   margin-left: 8px;
   font-family: Ubuntu_700Bold;
@@ -98,15 +98,14 @@ export const CarTitle = styled.Text`
 export const ButtonStartRent = styled(RectButton)`
   flex-direction: row;
   align-self: flex-end;
-  /* background: #1d1f24; */
+
   padding: 8px;
   border-radius: 4px;
-  /* align-items: center; */
 `;
 export const ButtonStartRentText = styled.Text`
   border-bottom-width: 2px;
   border-bottom-color: #ffc700;
-  color: #6c6c6c;
+  color: #1d1f24;
   font-size: 16px;
   font-family: Ubuntu_500Medium;
   margin-right: 4px;

@@ -2,13 +2,12 @@ import styled from 'styled-components/native';
 
 export const Container = styled.View`
   flex: 1;
-  padding-top: 6px;
 `;
 
 export const Header = styled.View`
   background: #1d1f24;
   height: 240px;
-  padding: 48px 8px 8px 16px;
+  padding: 64px 8px 8px 16px;
 `;
 
 export const HeaderTitle = styled.Text`
@@ -18,7 +17,7 @@ export const HeaderTitle = styled.Text`
   font-family: Ubuntu_500Medium;
 `;
 export const BottomContent = styled.View`
-  margin-top: 74px;
+  margin-top: 48px;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
@@ -26,12 +25,8 @@ export const BottomContent = styled.View`
 
 export const ArrowImage = styled.Image``;
 
-export const SelectInitialDateContainer = styled.View`
-  align-items: center;
-`;
-export const SelectFinalDateContainer = styled.View`
-  align-items: center;
-`;
+export const SelectInitialDateContainer = styled.View``;
+export const SelectFinalDateContainer = styled.View``;
 
 export const SelectedInitialDateText = styled.Text`
   margin-top: 8px;
@@ -50,5 +45,5 @@ export const ToText = styled.Text`
 `;
 
 export const ButtonContainer = styled.View`
-  padding: 32px 24px 24px 24px;
+  padding: 16px 24px 24px 24px;
 `;

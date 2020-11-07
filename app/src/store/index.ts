@@ -1,19 +1,10 @@
-import { combineReducers, Middleware } from 'redux';
+import { Middleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 
-import auth from './ducks/auth';
-import signUp from './ducks/signUp';
-import cars from './ducks/cars';
-
 import createStore from './createStore';
+import { rootReducer } from './ducks/rootReducer';
 
 import rootSaga from './ducks/rootSaga';
-
-const rootReducer = combineReducers({
-  auth,
-  signUp,
-  cars,
-});
 
 const sagaMiddleware = createSagaMiddleware();
 

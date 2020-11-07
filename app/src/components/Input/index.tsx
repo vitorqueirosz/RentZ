@@ -5,19 +5,13 @@ import { Feather } from '@expo/vector-icons';
 import { Container, Icon, TextInput } from './styles';
 
 interface InputProps extends TextInputProps {
-  icon: string;
+  icon?: string;
   isPassword?: boolean;
-  name: string;
+  name?: string;
   value: any;
 }
 
-const Input: React.FC<InputProps> = ({
-  icon,
-  isPassword,
-  value,
-  name,
-  ...rest
-}) => {
+const Input: React.FC<InputProps> = ({ icon, isPassword, value, ...rest }) => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [isFocused, setIsFocused] = useState<boolean>(false);
   const [isFilled, setIsFilled] = useState<boolean>(false);
@@ -42,6 +36,8 @@ const Input: React.FC<InputProps> = ({
         color={isFocused || isFilled ? '#FFC700' : '#848484'}
       />
       <TextInput
+        isFocused={isFocused}
+        isFilled={isFilled}
         ref={inputElementRef}
         placeholderTextColor="#848484"
         {...rest}

@@ -2,6 +2,7 @@ import {
     Column,
     CreateDateColumn,
     Entity,
+    JoinColumn,
     OneToMany,
     PrimaryGeneratedColumn,
     UpdateDateColumn,
@@ -38,6 +39,7 @@ class User {
     updated_at: Date;
 
     @OneToMany(() => Rent, rent => rent.user)
+    @JoinColumn({ name: 'id' })
     rents: Rent[];
 }
 

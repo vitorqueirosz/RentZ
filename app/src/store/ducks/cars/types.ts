@@ -1,3 +1,9 @@
+import { ActionType } from 'typesafe-actions';
+
+import * as actions from './actions';
+
+export type CarAction = ActionType<typeof actions>;
+
 export interface CarState {
   readonly cars: [];
   readonly loadingSignInRequest: boolean;

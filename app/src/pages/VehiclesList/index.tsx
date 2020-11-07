@@ -1,14 +1,8 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { ActivityIndicator, Button, RefreshControl, View } from 'react-native';
+import React, { useCallback, useEffect, useState } from 'react';
+import { ActivityIndicator, RefreshControl } from 'react-native';
 
 import { Feather } from '@expo/vector-icons';
 
-import {
-  NativeViewGestureHandlerGestureEvent,
-  NativeViewGestureHandlerProperties,
-  NativeViewGestureHandlerStateChangeEvent,
-  RectButtonProperties,
-} from 'react-native-gesture-handler';
 import { useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import CarItem, { Car } from '../../components/CarItem';
@@ -22,7 +16,6 @@ import {
   ScrollView,
   BrandItem,
   BrandName,
-  TopContent,
   CarsContent,
   CarsScrollView,
 } from './styles';
@@ -33,10 +26,6 @@ import { StoreState } from '../../store/createStore';
 interface Brand {
   name: string;
   id: string;
-}
-
-interface CarsFiltered {
-  cars: [];
 }
 
 const VehiclesList: React.FC = () => {
@@ -50,6 +39,7 @@ const VehiclesList: React.FC = () => {
   const navigation = useNavigation();
 
   const carsFiltered = useSelector((state: StoreState) => state.cars.cars);
+  console.log(carsFiltered);
 
   useEffect(() => {
     if (carsFiltered.cars?.length) {
@@ -131,18 +121,16 @@ const VehiclesList: React.FC = () => {
         ) : (
           <>
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-              <BrandItem active={selectedId === '' && true}>
-                <BrandName active={selectedId === '' && true}>Todos</BrandName>
+              <BrandItem active={selectedId === ''}>
+                <BrandName active={selectedId === ''}>Todos</BrandName>
               </BrandItem>
               {brands.map((b: Brand) => (
                 <BrandItem
                   key={b.id}
                   onPress={() => handleSelectedBrand(b.id)}
-                  active={b.id === selectedId && true}
+                  active={b.id === selectedId}
                 >
-                  <BrandName active={b.id === selectedId && true}>
-                    {b.name}
-                  </BrandName>
+                  <BrandName active={b.id === selectedId}>{b.name}</BrandName>
                 </BrandItem>
               ))}
             </ScrollView>

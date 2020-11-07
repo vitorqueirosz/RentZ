@@ -10,7 +10,6 @@ class RentController {
         response: Response,
     ): Promise<Response> {
         const {
-            user_id,
             car_id,
             from,
             to,
@@ -21,6 +20,8 @@ class RentController {
 
         const rentRepository = new RentRepository();
         const createRentService = new CreateRentService(rentRepository);
+
+        const user_id = request.user.id;
 
         const rent = await createRentService.execute({
             user_id,

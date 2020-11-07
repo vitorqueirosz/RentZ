@@ -2,15 +2,16 @@ import React, { useEffect, useState } from 'react';
 
 import { Feather } from '@expo/vector-icons';
 
-import AsyncStorage from '@react-native-community/async-storage';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { AppLoading } from 'expo';
 import { useNavigation } from '@react-navigation/native';
 import { ActivityIndicator } from 'react-native';
+
 import CarItem, { Car } from '../../components/CarItem';
 
 import api from '../../services/api';
 import { StoreState } from '../../store/createStore';
+import { signOutRequest } from '../../store/ducks/signOut/actions';
 
 import {
   Container,
@@ -34,6 +35,7 @@ import {
   AmountCars,
   CarTitle,
 } from './styles';
+import { User } from '../../store/ducks/auth/types';
 
 interface Brand {
   id: string;
@@ -44,15 +46,21 @@ interface Brand {
 
 const Home: React.FC = () => {
   const [brands, setBrands] = useState([]);
+  const [userData, setUserData] = useState<User | null>({} as User);
   const [cars, setCars] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const navigation = useNavigation();
+  const dispatch = useDispatch();
 
-  const { user } = useSelector((state: StoreState) => state.auth);
+  const { user, token } = useSelector((state: StoreState) => state.auth);
+  const { user: updatedUser } = useSelector((state: StoreState) => state.user);
+
+  console.log(user);
 
   useEffect(() => {
     setLoading(true);
+    setUserData(user);
 
     (async function findAllBrands() {
       const { data } = await api.get('/brands');
@@ -64,25 +72,46 @@ const Home: React.FC = () => {
       setBrands(data);
       setLoading(false);
     })();
-  }, []);
+  }, [user]);
 
-  if (!user) {
+  useEffect(() => {
+    if (updatedUser) {
+      setUserData(updatedUser);
+      console.log('TESTE');
+    }
+  }, [updatedUser]);
+
+  if (!userData) {
     return <AppLoading />;
   }
+
+  function handleLogout() {
+    if (token) {
+      dispatch(signOutRequest({ token }));
+    }
+  }
+
+  console.log(userData);
 
   return (
     <Container>
       <Header>
         <ProfileInfos>
-          <ProfileImage source={{ uri: user.avatar }} />
+          <ProfileImage
+            source={{
+              uri:
+                userData.avatar ||
+                'https://clipartart.com/images/driver-icon-clipart-1.png',
+            }}
+          />
 
           <ProfileNameContainer>
             <SaudationName>Olá,</SaudationName>
-            <ProfileNameText>{user.name}</ProfileNameText>
+            <ProfileNameText>{userData.name}</ProfileNameText>
           </ProfileNameContainer>
         </ProfileInfos>
 
-        <Feather name="power" size={25} color="#635F5F" />
+        <Feather name="power" size={25} color="#aaa" onPress={handleLogout} />
       </Header>
 
       <Content>

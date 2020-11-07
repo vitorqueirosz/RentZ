@@ -14,9 +14,9 @@ export const TopContent = styled.View`
 `;
 
 export const LogoNameText = styled.Text`
-  font-size: 32px;
+  font-size: 24px;
   font-weight: bold;
-  color: #fff;
+  color: #ffc700;
   position: absolute;
   left: 15px;
   top: 26px;
@@ -68,7 +68,7 @@ export const AlreadyHaveAccountButton = styled(BorderlessButton)`
   align-items: center;
 `;
 export const AlreadyHaveAccountButtonText = styled.Text`
-  color: #a19d8b;
+  color: #ffc700;
   font-size: 18px;
   font-family: Ubuntu_700Bold;
   margin-left: 8px;

@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import { Button as B, Text } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
 import carIcon from '../../assets/carIcon5.png';
-import { Creators } from '../../store/ducks/cars';
+import { fetchCarsRequest } from '../../store/ducks/cars/actions';
 
 import Button from '../Button';
 
@@ -63,7 +63,7 @@ const SearchModal: React.FC<ModalProps> = ({ show, brand, setShow }) => {
 
     if (brand) {
       dispatch(
-        Creators.fetchCarsRequest({
+        fetchCarsRequest({
           type,
           transmission,
           initial_price: 0,
@@ -76,7 +76,7 @@ const SearchModal: React.FC<ModalProps> = ({ show, brand, setShow }) => {
     }
 
     dispatch(
-      Creators.fetchCarsRequest({
+      fetchCarsRequest({
         type,
         transmission,
         initial_price: 0,
@@ -139,14 +139,14 @@ const SearchModal: React.FC<ModalProps> = ({ show, brand, setShow }) => {
                 </TypeButtonText>
               </TypeButton>
 
-              <TypeButton selected={type === 'eletric'}>
+              <TypeButton selected={type === 'Elétrico'}>
                 <Feather
                   name="zap"
                   size={25}
-                  color={type === 'eletric' ? '#FFC700' : '#938D8D'}
-                  onPress={() => handleSelectedTypeButton('eletric')}
+                  color={type === 'Elétrico' ? '#FFC700' : '#938D8D'}
+                  onPress={() => handleSelectedTypeButton('Elétrico')}
                 />
-                <TypeButtonText selected={type === 'eletric'}>
+                <TypeButtonText selected={type === 'Elétrico'}>
                   Elétrico
                 </TypeButtonText>
               </TypeButton>

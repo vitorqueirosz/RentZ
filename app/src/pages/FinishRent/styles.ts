@@ -15,9 +15,10 @@ export const Header = styled.View`
   padding: 0 16px;
 `;
 
-export const Content = styled.View`
+export const Content = styled.ScrollView`
   flex: 1;
   padding: 16px 16px 16px 16px;
+  margin-bottom: 8px;
 `;
 export const HeaderTitle = styled.Text`
   color: #ffffff;
@@ -26,7 +27,6 @@ export const HeaderTitle = styled.Text`
 `;
 
 export const CategoryName = styled.Text`
-  font-size: 12px;
   font-family: Ubuntu_700Bold;
   color: #b8b8b8;
 `;
@@ -46,7 +46,7 @@ export const CarName = styled.Text`
 `;
 export const CarImage = styled.Image`
   width: 100%;
-  height: 140px;
+  height: 180px;
   margin-bottom: 10px;
 `;
 
@@ -54,7 +54,7 @@ export const PriceContainer = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 16px;
+  margin: 16px 0;
 `;
 export const PricePerDayText = styled.Text`
   color: #8c8c8c;
@@ -78,15 +78,15 @@ export const DetailsContainer = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  margin-top: 4px;
+  margin-top: 8px;
 `;
 export const ScheduleContainer = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  margin-top: 16px;
+  margin-top: 32px;
   background: #1d1f24;
-  padding: 8px 12px;
+  padding: 16px 8px;
   border-radius: 4px;
 `;
 export const PeriodContainer = styled.View``;
@@ -112,6 +112,8 @@ export const ButtonContainer = styled.View`
   background: #111112;
   width: 100%;
   padding: 18px;
+  /* position: absolute;
+  bottom: 0; */
 `;
 
 export const TotalPriceContainer = styled.View`
@@ -148,3 +150,39 @@ export const PricePerDayMultiText = styled.Text`
   color: #a4a4a4;
 `;
 export const PriceContainerButton = styled.View``;
+
+export const SelectTimeContainer = styled.View`
+  background: #1d1f24;
+  width: 100%;
+  margin-top: 32px;
+  padding: 16px 12px;
+  border-radius: 4px;
+`;
+export const SelectTimeTitle = styled.Text`
+  color: #a4a4a4;
+  font-family: Ubuntu_700Bold;
+`;
+
+export const SelectContainer = styled.View`
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 18px;
+`;
+
+export const Input = styled.TextInput`
+  background: #272930;
+  width: 120px;
+  margin-top: 12px;
+  border-radius: 4px;
+  padding: 4px 8px;
+  color: #ffc700;
+  font-family: Ubuntu_700Bold;
+`;
+
+export const SelectSessionTime = styled.View``;
+export const SessionTitle = styled.Text`
+  color: #a4a4a4;
+  font-family: Ubuntu_500Medium;
+`;

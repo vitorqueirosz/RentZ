@@ -1,4 +1,9 @@
+import { ActionType } from 'typesafe-actions';
 import { User } from '../auth/types';
+
+import * as actions from './actions';
+
+export type SignUpAction = ActionType<typeof actions>;
 
 export interface SignUpState {
   readonly loadingSignUpRequest: boolean;

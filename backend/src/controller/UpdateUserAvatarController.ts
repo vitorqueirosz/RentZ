@@ -16,6 +16,8 @@ class UserAvatarController {
             avatarFile: request.file.filename,
         });
 
+        user.avatar = `http://192.168.0.119:3333/uploads/${user.avatar}`;
+
         return response.json(user);
     }
 }

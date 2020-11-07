@@ -12,7 +12,7 @@ import Button from '../../components/Button';
 import Input from '../../components/Input';
 
 import backgroundImg from '../../assets/background-img.png';
-import { Creators as CreatorsSignUp } from '../../store/ducks/signUp';
+import { signUpRequest } from '../../store/ducks/signUp/actions';
 import { StoreState } from '../../store/createStore';
 
 import {
@@ -37,9 +37,7 @@ const SignUp: React.FC = () => {
 
   const dispatch = useDispatch();
 
-  const { user, loadingSignUpRequest } = useSelector(
-    (state: StoreState) => state.signUp,
-  );
+  const { user } = useSelector((state: StoreState) => state.signUp);
 
   useEffect(() => {
     if (user) {
@@ -48,7 +46,7 @@ const SignUp: React.FC = () => {
   }, [user, navigation]);
 
   function handleSignUp() {
-    dispatch(CreatorsSignUp.signUpRequest({ name, cpf, email, password }));
+    dispatch(signUpRequest({ name, cpf, email, password }));
   }
 
   return (
@@ -62,7 +60,7 @@ const SignUp: React.FC = () => {
           <Container>
             <TopContent>
               <LogoNameText>RentZ</LogoNameText>
-              <BackgroundImage source={backgroundImg} resizeMode="cover" />
+              <BackgroundImage source={backgroundImg} resizeMode="contain" />
             </TopContent>
 
             <Content>
@@ -79,6 +77,7 @@ const SignUp: React.FC = () => {
                 icon="alert-circle"
                 placeholder="CPF"
                 returnKeyType="next"
+                keyboardType="numeric"
                 value={cpf}
                 name="cpf"
                 onChangeText={(text: string) => setCpf(text)}
@@ -87,6 +86,7 @@ const SignUp: React.FC = () => {
                 icon="mail"
                 placeholder="E-mail"
                 returnKeyType="next"
+                keyboardType="email-address"
                 value={email}
                 name="email"
                 onChangeText={(text: string) => setEmail(text)}
@@ -115,7 +115,7 @@ const SignUp: React.FC = () => {
               <AlreadyHaveAccountButton
                 onPress={() => navigation.navigate('SignIn')}
               >
-                <Feather name="arrow-left" size={20} color="#A19D8B" />
+                <Feather name="arrow-left" size={20} color="#FFC700" />
                 <AlreadyHaveAccountButtonText>
                   Já tenho conta
                 </AlreadyHaveAccountButtonText>

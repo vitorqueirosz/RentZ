@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 
 export const Container = styled.SafeAreaView`
   flex: 1;
-  padding: 16px 24px 64px 24px;
+  /* padding: 16px 32px 64px 32px; */
   background: #1d1f24;
   justify-content: center;
 `;
@@ -12,14 +12,15 @@ export const TopContent = styled.View`
   flex-direction: row;
   justify-content: center;
   margin-top: 0px;
+  padding: 0px 24px;
 `;
 
 export const LogoNameText = styled.Text`
-  font-size: 32px;
+  font-size: 24px;
   font-weight: bold;
-  color: #fff;
+  color: #ffc700;
   position: absolute;
-  left: 15px;
+  left: 32px;
   top: 26px;
   font-family: Ubuntu_500Medium;
 `;
@@ -30,7 +31,8 @@ export const BackgroundImage = styled.ImageBackground`
   color: #000;
 `;
 export const Content = styled.View`
-  margin-top: 64px;
+  margin-top: 24px;
+  padding: 0px 24px 0px 24px;
 `;
 
 export const BottomContent = styled.View`
@@ -56,9 +58,11 @@ export const ActionsContainer = styled.View`
   align-items: center;
   width: 100%;
   margin-top: 16px;
+  padding: 0px 24px;
 `;
 
 export const ButtonContainer = styled.View`
   width: 100%;
   margin-top: 64px;
+  padding: 0px 24px;
 `;

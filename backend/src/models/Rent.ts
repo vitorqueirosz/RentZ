@@ -4,9 +4,11 @@ import {
     Entity,
     JoinColumn,
     ManyToOne,
+    OneToOne,
     PrimaryGeneratedColumn,
     UpdateDateColumn,
 } from 'typeorm';
+import Car from './Car';
 
 import User from './User';
 
@@ -45,6 +47,10 @@ class Rent {
     @ManyToOne(() => User, user => user.rents)
     @JoinColumn({ name: 'user_id' })
     user: User;
+
+    @OneToOne(() => Car, car => car.rent)
+    @JoinColumn({ name: 'car_id' })
+    car: Car;
 }
 
 export default Rent;

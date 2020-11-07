@@ -25,7 +25,6 @@ export const HeaderTitle = styled.Text`
 `;
 
 export const CategoryName = styled.Text`
-  font-size: 12px;
   font-family: Ubuntu_700Bold;
   color: #b8b8b8;
 `;
@@ -40,7 +39,7 @@ export const BrandName = styled.Text`
 export const CarName = styled.Text`
   color: #ffc700;
   font-size: 20px;
-  font-family: Ubuntu_500Medium;
+  font-family: Ubuntu_700Bold;
   margin-top: 2px;
 `;
 export const CarImage = styled.Image`

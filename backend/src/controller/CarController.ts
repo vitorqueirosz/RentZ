@@ -69,6 +69,8 @@ class CarController {
             brand_id,
         } = request.query;
 
+        console.log(type, transmission, initial_price, final_price, brand_id);
+
         const carRepository = new CarRepository();
         const findCarService = new FindCarByFilterService(carRepository);
 

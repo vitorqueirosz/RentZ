@@ -1,7 +1,13 @@
-import React, { useState } from 'react';
-import { Feather } from '@expo/vector-icons';
+import React from 'react';
+import { AntDesign, Feather } from '@expo/vector-icons';
+
+import { format } from 'date-fns';
 
 import { useNavigation } from '@react-navigation/native';
+import { parseISO } from 'date-fns/esm';
+
+import { useDispatch } from 'react-redux';
+import AsyncStorage from '@react-native-community/async-storage';
 import {
   Container,
   TopContent,
@@ -12,7 +18,18 @@ import {
   CarTextName,
   CarImage,
   ButtonGoToDetail,
+  PriceContainer,
+  PricePerDay,
+  PerDayText,
+  RentContainer,
+  PeriodRentContainer,
+  RentTimeText,
 } from './styles';
+import { Rent } from '../../pages/Appointments';
+import { removeToFavorites } from '../../store/ducks/favorites/actions';
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { pt } = require('date-fns/locale');
 
 export interface Car {
   id: string;
@@ -30,14 +47,43 @@ export interface Car {
 interface CarItemProps {
   car: Car;
   details?: boolean;
+  rent?: Rent;
+  favorite?: boolean;
 }
 
-const CarItem: React.FC<CarItemProps> = ({ car, details }) => {
+const CarItem: React.FC<CarItemProps> = ({ car, details, rent, favorite }) => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
 
   const handleNavigateToCar = (carDetails: Car) => {
     navigation.navigate('Car', { car: carDetails });
   };
+
+  function formattedDate(date: string) {
+    const formattedISO = parseISO(date);
+
+    const dateFormatted = format(formattedISO, 'dd  MMMM yyyy', {
+      locale: pt,
+    });
+
+    return dateFormatted;
+  }
+
+  const handleFavoriteCar = async () => {
+    const favorites = await AsyncStorage.getItem('favorites');
+
+    let favoritesArray = [];
+
+    if (favorites) {
+      favoritesArray = JSON.parse(favorites);
+    }
+
+    dispatch(removeToFavorites({ car, favoritedsCars: favoritesArray }));
+
+    await AsyncStorage.setItem('favorites', JSON.stringify(favoritesArray));
+  };
+
+  console.log(car.image);
 
   return (
     <Container>
@@ -49,16 +95,39 @@ const CarItem: React.FC<CarItemProps> = ({ car, details }) => {
             <Feather size={20} color="#FFC700" name="chevron-right" />
           </ButtonGoToDetail>
         )}
+
+        {favorite && (
+          <ButtonGoToDetail onPress={handleFavoriteCar}>
+            <AntDesign size={20} color="#FFC700" name="heart" />
+          </ButtonGoToDetail>
+        )}
       </TopContent>
 
       <Content>
-        <CarNameContainer>
+        <CarNameContainer rent={!!rent}>
           <CarBrandName>{car.brand}</CarBrandName>
           <CarTextName>{car.name}</CarTextName>
+
+          {rent && (
+            <PriceContainer>
+              <PricePerDay>{`R$ ${car.price}`}</PricePerDay>
+              <PerDayText>/dia</PerDayText>
+            </PriceContainer>
+          )}
         </CarNameContainer>
 
-        <CarImage source={{ uri: car.image }} />
+        <CarImage uri={car.image} />
       </Content>
+      {rent && (
+        <RentContainer>
+          <Feather size={20} color="#FFC700" name="calendar" />
+
+          <PeriodRentContainer>
+            <RentTimeText>{formattedDate(rent.from)}</RentTimeText>
+            <RentTimeText>{formattedDate(rent.to)}</RentTimeText>
+          </PeriodRentContainer>
+        </RentContainer>
+      )}
     </Container>
   );
 };

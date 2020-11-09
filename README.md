@@ -20,8 +20,11 @@
 ### Mobile
 
 <p align="center">
-  <img src="https://github.com/vitorqueirosz/RentZ/blob/master/app/src/assets/home.png?raw=true" heigth="40%" width="25%"/>
-  <img src="https://github.com/vitorqueirosz/RentZ/blob/master/app/src/assets/list.png?raw=true" heigth="40%" width="25%"/>
+  <img src="https://github.com/vitorqueirosz/RentZ/blob/master/app/src/assets/home.png?raw=true" heigth="80%" width="30%"/>
+  <img src="https://github.com/vitorqueirosz/RentZ/blob/master/app/src/assets/list.png?raw=true" heigth="80%" width="30%"/>
+ <img src="https://github.com/vitorqueirosz/RentZ/blob/master/app/src/assets/rent.png?raw=true" heigth="80%" width="30%"/>
+ 
+ 
 </p>
 <br />
 
@@ -35,6 +38,7 @@ This project was developed with the following technologies:
 - [TypeORM](https://typeorm.io/#/)
 - [Postgres](https://www.sqlite.org/index.html)
 - [Expo](https://expo.io)
+- [NodeMailer](https://nodemailer.com/about/)
 - [React Navigation](https://reactnavigation.org/docs)
 - [Redux](https://redux.js.org)
 - [Redux Saga](https://redux-saga.js.org)

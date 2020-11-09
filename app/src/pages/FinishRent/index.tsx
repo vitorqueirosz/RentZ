@@ -74,6 +74,8 @@ const FinishRent: React.FC<FinishRentProps> = () => {
   const { car } = route.params as FinishRentProps;
   const { from, to } = useSelector((state: StoreState) => state.schedule);
 
+  const { user } = useSelector((state: StoreState) => state.auth);
+
   const hours = [
     { label: '00:00', value: '00:00' },
     { label: '01:00', value: '01:00' },
@@ -117,6 +119,17 @@ const FinishRent: React.FC<FinishRentProps> = () => {
   async function handleRentCar() {
     try {
       await api.post('/rents', {
+        car_id: car.id,
+        from,
+        to,
+        request_time: requestTime,
+        return_time: returnTime,
+        total_price: Math.floor(rentedDays * Number(car.price)),
+      });
+
+      await api.post('/users/email', {
+        name: user?.name,
+        email: user?.email,
         car_id: car.id,
         from,
         to,

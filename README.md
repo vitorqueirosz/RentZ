@@ -20,11 +20,11 @@
 ### Mobile
 
 <p align="center">
-  <img src="https://github.com/vitorqueirosz/RentZ/blob/master/app/src/assets/home.png?raw=true" heigth="80%" width="30%"/>
-  <img src="https://github.com/vitorqueirosz/RentZ/blob/master/app/src/assets/list.png?raw=true" heigth="80%" width="30%"/>
- <img src="https://github.com/vitorqueirosz/RentZ/blob/master/app/src/assets/rent.png?raw=true" heigth="80%" width="30%"/>
- 
- 
+  <img src="https://github.com/vitorqueirosz/RentZ/blob/master/app/src/assets/signin.png?raw=true" heigth="30%" width="20%"/>
+  <img src="https://github.com/vitorqueirosz/RentZ/blob/master/app/src/assets/SignUp.png?raw=true" heigth="30%" width="20%"/>
+ <img src="https://github.com/vitorqueirosz/RentZ/blob/master/app/src/assets/home.png?raw=true" heigth="30%" width="20%"/>
+ <img src="https://github.com/vitorqueirosz/RentZ/blob/master/app/src/assets/list.png?raw=true" heigth="30%" width="20%"/>
+ <img src="https://github.com/vitorqueirosz/RentZ/blob/master/app/src/assets/finish.png?raw=true" heigth="30%" width="20%"/>
 </p>
 <br />
 

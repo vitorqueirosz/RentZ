@@ -38,6 +38,7 @@ This project was developed with the following technologies:
 - [TypeORM](https://typeorm.io/#/)
 - [Postgres](https://www.sqlite.org/index.html)
 - [Expo](https://expo.io)
+- [NodeMailer](https://nodemailer.com/about/)
 - [React Navigation](https://reactnavigation.org/docs)
 - [Redux](https://redux.js.org)
 - [Redux Saga](https://redux-saga.js.org)
